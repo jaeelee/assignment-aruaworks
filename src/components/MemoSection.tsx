@@ -1,7 +1,7 @@
 import { useMemos, formatRelativeTime } from "../hooks/useMemos";
-import type { Memo } from "../lib/supabase";
 import like from "../assets/like.svg";
 import comment from "../assets/chat.svg";
+import type { Memo } from "../lib/supabase";
 
 export default function MemoSection() {
   const { data: memos = [], isLoading, isError } = useMemos();
@@ -36,6 +36,12 @@ export default function MemoSection() {
                       className="w-[388.67px] h-[380px] flex-shrink-0 bg-white/80 animate-pulse border border-[#F4EFEA] shadow-[-4px_4px_4px_rgba(172,121,58,0.1)]"
                     />
                   ))}
+                  {[1, 2, 3].map((i) => (
+                    <div
+                      key={`dup-${i}`}
+                      className="w-[388.67px] h-[380px] flex-shrink-0 bg-white/80 animate-pulse border border-[#F4EFEA] shadow-[-4px_4px_4px_rgba(172,121,58,0.1)]"
+                    />
+                  ))}
                 </div>
               </>
             ) : isError ? (
@@ -45,6 +51,9 @@ export default function MemoSection() {
                 <div className="flex gap-5 md:gap-6 flex-shrink-0">
                   {memos.map((memo) => (
                     <MemoCard key={memo.id} memo={memo} />
+                  ))}
+                  {memos.map((memo) => (
+                    <MemoCard key={`dup-${memo.id}`} memo={memo} />
                   ))}
                 </div>
               </>
